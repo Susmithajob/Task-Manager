@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../stylesheets/homestyle.css">
+</head>
+<body>
+    <h1>Hello <%=name%></h1>
+    <form action="/addTask" method="post">
+     <input id="text" type="text" name="task" placeholder="Enter your tasks here">
+     <input id="date" type="date" name="date">
+     <button id="addBtn" onclick="addEntry()">Add</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Task No.</th>
+                <th>Task</th>
+                <th>Task Date</th>
+            </tr>
+        </thead>
+        <tbody id="entry">
+            
+        </tbody>
+    </table> 
+    <script>
+        async function addEntry()
+        {
+            const response = await fetch('/addTask');
+            const responseData = await response.json();
+            console.log(responseData);
+            const taskList = document.getElementById('entry');
+
+            data.userModel[0].tasks.forEach((task, index) => {
+            const tr = document.createElement('tr');
+            const taskNo= document.createElement('td');
+            const taskEntry = document.createElement('td');
+            const taskDate = document.createElement('td');
+
+            taskNo.textContent = index+1;
+            taskEntry.textContent = task.description;
+            taskDate.textContent = new Date(task.dateAssigned.$date);
+
+            tr.appendChild(taskNo);
+            tr.appendChild(taskEntry);
+            tr.appendChild(taskDate);
+            entry.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>

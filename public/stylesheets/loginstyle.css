@@ -1,0 +1,49 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-image: url("../images/loginpgbg.jpg");
+    background-size: cover;  
+  }
+  
+  h1{
+    text-align: center;
+    color: rgb(221, 72, 104);
+  }
+  p{
+    text-align: center;
+  }
+  
+  input
+  {
+    border-radius: 5px;
+    width: 95%;
+    margin: 5px 0;
+    height: 20px;  
+  }
+  .form
+  {
+    width: 60%;
+    background-color: rgb(223, 142, 215);
+    border: 2px solid magenta;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 350px;
+    margin: auto;
+  }
+  
+  button
+  {
+    margin-left: 40%;
+    margin-top: 5px;
+    border-radius: 4px;
+  }
+  a:hover
+  {
+    cursor: pointer; 
+    color: blue;
+  }
+  button:hover
+  {
+    cursor: pointer; 
+    background-color: rgb(97, 33, 97);
+  }
