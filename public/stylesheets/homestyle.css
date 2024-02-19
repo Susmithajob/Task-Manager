@@ -1,5 +1,84 @@
 body {
     padding: 10px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: linear-gradient(270deg, #ff7e5f, #feb47b);
+    background-image: url("../images/registerbg.jpg");
+    background-size: cover;  
+    text-align: center;
+    box-sizing: border-box;
+}
+h1{
+    color: rgb(228, 201, 201);
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+    transition: opacity 0.5s ease-in-out;
+  }
+  #tableTask
+  {
+    
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    background-color:  #3d313f;
+    width: 60%;
+    min-width: 350px;
+    color: white;
+  } 
+  th{
+    color: #6789bb;
+    padding: 5px;
+  }
+  #th1{
+    max-width: 30px;
+  }
+  i:hover{
+    cursor: pointer;
+  }
+  i{
+    font-size: 14px;
+  }
+  #text{
+    width: 40%;
+    min-width: 150px;
+    height: 25px;
+    border-radius: 4px;
+    padding-left: 10px;
+    border: none;
+  }
+#date{
+    height: 25px;
+    border-radius: 4px;
+    padding-left: 10px;
+    border: none;
+  }
+  button{
+    height: 25px;
+    border-radius: 4px;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+  
+#logoutForm {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#logoutForm button {
+    padding: 10px;
+    padding-bottom: 10px;
+    background-color: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+#logoutForm button:hover {
+    background-color: #e99898;
 }

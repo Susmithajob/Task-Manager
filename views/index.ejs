@@ -7,8 +7,10 @@
   <link rel="stylesheet" href="../stylesheets/style.css">
 </head>
 <body>
-  <h1>Register here!</h1>
+  
+  <div class="content"><p id="taskl">TASK LIST</p>
   <div class="form">
+  <h1>Register here!</h1>
   <form action="/register" method="POST">
     <label for="userfirst">First Name</label>
     <input type="text" name="firstname" id="userfirst">
@@ -19,13 +21,29 @@
     <label for="email">Email Id</label>
     <input type="email" name="email" id="email">
     <label for="password">Password</label>
-    <input type="password" name="password" id="password">
+    <input type="password" name="password" id="password" onkeyup='check()'>
     <label for="passwordconfirm">Confirm Password</label>
-    <input type="password" name="passwordconfirm" id="passwordconfirm">
+    <input type="password" name="passwordconfirm" id="passwordconfirm" onkeyup='check()'>
+    <span id='message'></span><br>
     <button type="submit">Submit</button>  
   </form>
-  </div>
-  <p>Already have an accout?  <a href="/login">Login here</a></p>
-  
+  <p>Already have an accout?  <a href="/login">Login here</a></p> 
+ </div>
+</div> 
+<script>
+function check() {
+  var password = document.getElementById('password').value;
+  var confirmPassword = document.getElementById('passwordconfirm').value;
+
+  if (password === confirmPassword) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'Passowrds matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Passwords not matching';
+  }
+}
+
+</script>
 </body>
 </html>

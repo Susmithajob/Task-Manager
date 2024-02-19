@@ -2,8 +2,13 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("../images/registerbg.jpg");
   background-size: cover;
+  padding: 10px;
 
-
+}
+#taskl{
+  font-size: 70px;
+  color: wheat;
+  text-shadow: 2px 2px #dc1515;
 }
 
 h1{
@@ -24,12 +29,23 @@ input
 .form
 {
   width: 60%;
-  background-color: rgb(249, 127, 127);
-  border: 2px solid rgb(137, 60, 56);
-  padding: 20px;
-  border-radius: 5px;
   max-width: 300px;
-  margin: auto;
+  margin-left: 200px; 
+  color: white;
+
+}
+
+form{
+  border: 1px solid white;  
+  border-radius: 5px;
+  padding: 20px;
+
+}
+.content{
+  display: flex;
+ 
+  justify-content: center;
+  align-items: center;
 }
 
 button
@@ -37,6 +53,8 @@ button
   margin-left: 40%;
   margin-top: 5px;
   border-radius: 4px;
+  border: none;
+  height: 20px;
 }
 p,a{
   color: white;
@@ -49,5 +67,6 @@ a:hover
 button:hover
 {
   cursor: pointer; 
-  background-color: rgb(97, 33, 97);
+  background-color:rgb(93, 137, 204);
 }
+

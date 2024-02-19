@@ -34,18 +34,32 @@ router.post('/register', function(req, res) {
       console.error(err);
       return res.redirect('/register'); // Redirect to registration page if registration fails
     }
-
     passport.authenticate("local")(req, res, function() {
       res.redirect('/profile');
     });
   });
 });
 
+router.get('/profile', async function(req, res, next) {
+  try {
+    const user = await userModel.findById(req.user._id);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    res.render('home', { name: req.user.firstName, tasks: user.tasks });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch tasks' });
+  }
+});
+
+
 
 router.get('/addTask', async (req, res) => {
   try {
-      const userModel = await userModel.find(); 
-      res.json({ userModel });
+      const userModel = await userModel.find();
+      res.render('home',{name:req.user.firstName}); 
+      // res.json({ userModel });
   } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Failed to fetch tasks' });
@@ -83,7 +97,77 @@ router.post('/addTask', function(req, res) {
     });
 });
 
+router.post('/deleteTask', function(req, res) {
+  if (!req.isAuthenticated()) {
+    return res.status(401).send('Unauthorized');
+  }
 
+  userModel.findById(req.user._id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+
+      // Find the index of the task to be deleted
+      const index = user.tasks.findIndex(task => task._id.toString() === req.body.taskId);
+
+      if (index === -1) {
+        return res.status(404).send('Task not found');
+      }
+
+      // Remove the task from the tasks array
+      user.tasks.splice(index, 1);
+
+      // Save the updated user document
+      return user.save();
+    })
+    .then(() => {
+      res.redirect('/profile');
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Error deleting task');
+    });
+});
+
+router.post('/editTask', function(req, res) {
+  if (!req.isAuthenticated()) {
+    return res.status(401).send('Unauthorized');
+  }
+
+  userModel.findById(req.user._id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+
+      // Find the task to be edited
+      const task = user.tasks.find(task => task._id.toString() === req.body.taskId);
+
+      if (!task) {
+        return res.status(404).send('Task not found');
+      }
+
+      // Update the task's description or date
+      if (req.body.description) {
+        task.description = req.body.description;
+      }
+
+      if (req.body.date) {
+        task.dateAssigned = req.body.date;
+      }
+
+      // Save the updated user document
+      return user.save();
+    })
+    .then(() => {
+      res.redirect('/profile');
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Error editing task');
+    });
+});
 
 
 
@@ -98,6 +182,7 @@ router.post('/addTask', function(req, res) {
 //       }
 //     });
 //   });
+
 function isLoggedIn(req,res,next){
   if(req.isAuthenticated())
     return next();
@@ -112,9 +197,7 @@ router.get('/login',function(req,res){
   res.render('login');
 })
 
-router.get('/profile', function(req, res, next) {
-  res.render('home',{name:req.user.firstName});
-});
+
 
 router.post('/login',passport.authenticate('local',{
   successRedirect: "/profile",
