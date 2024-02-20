@@ -6,19 +6,6 @@ const localStrategy = require('passport-local');
 
 passport.use(new localStrategy(userModel.authenticate()));
 
-// router.post('/register',function(req,res){
-//    var userdata = new userModel({
-//     username : req.body.username,
-//     password : req.body.password
-//   })
-//   userModel.register(userdata,req.body.password)
-//   .then(function(registeredUser){
-//     passport.authenticate("local")(req,res,function(){
-//       res.redirect('/profile');
-//     })
-//   })
-// })
-
 router.post('/register', function(req, res) {
   var userdata = new userModel({
     firstName: req.body.firstname,
@@ -28,7 +15,6 @@ router.post('/register', function(req, res) {
     password: req.body.password,
     confirmpassword: req.body.passwordconfirm
   });
-
   userModel.register(userdata, req.body.password, function(err, registeredUser) {
     if (err) {
       console.error(err);
@@ -52,8 +38,6 @@ router.get('/profile', async function(req, res, next) {
     res.status(500).json({ error: 'Failed to fetch tasks' });
   }
 });
-
-
 
 router.get('/addTask', async (req, res) => {
   try {
@@ -170,19 +154,6 @@ router.post('/editTask', function(req, res) {
 });
 
 
-
-
-// router.post('/addTask', function(req, res) {
-//   userModel.findById('65cdf02845eb67a374f98188')
-//     user.tasks.push(req.body.addTask);
-//     user.save(function(err) {
-//       if (err) {
-//         console.error(err);
-//         return res.status(500).send('Error saving task');
-//       }
-//     });
-//   });
-
 function isLoggedIn(req,res,next){
   if(req.isAuthenticated())
     return next();
@@ -196,8 +167,6 @@ router.get('/', function(req, res, next) {
 router.get('/login',function(req,res){
   res.render('login');
 })
-
-
 
 router.post('/login',passport.authenticate('local',{
   successRedirect: "/profile",

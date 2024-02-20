@@ -26,13 +26,17 @@
                 <tr>
                     <td><%= index + 1 %></td>
                     <td><%= task.description %></td>
-                    <td><%= new Date(task.dateAssigned).toISOString().split('T')[0] %></td>
+                    <td class="date-cell" data-date="<%= new Date(task.dateAssigned).toISOString().split('T')[0] %>">
+                        <%= new Date(task.dateAssigned).toISOString().split('T')[0] %>
+                    </td>
+                    
                     <td>
                         <button onclick="toggleEditForm(<%= index %>)"><i class="fa-regular fa-pen-to-square"></i></button>
                         <form id="editForm<%= index %>" action="/editTask" method="post" style="display: none;">
                             <input type="hidden" name="taskId" value="<%= task._id %>">
                             <input type="text" name="description" value="<%= task.description %>">
-                            <input type="date" name="date" value="<%= task.dateAssigned.toISOString().split('T')[0] %>">
+                            <input class="dateEntry" type="date" name="date" value="<%= task.dateAssigned.toISOString().split('T')[0] %>">
+
                             <button type="submit">Save</button>
                         </form>
                     </td>
@@ -60,7 +64,30 @@
     <script src="https://kit.fontawesome.com/cb42701e4f.js" crossorigin="anonymous"></script>
 
     <script>
-        
+        const dateInput = document.getElementById('date');
+        dateInput.min = new Date().toISOString().split("T")[0];
+        document.addEventListener('DOMContentLoaded', function() {
+    const dateCells = document.querySelectorAll('.date-cell');
+    dateCells.forEach(dateCell => {
+        const dateValue = dateCell.getAttribute('data-date');
+        const selectedDate = new Date(dateValue);
+        const today = new Date();
+        const differenceInDays = Math.floor((selectedDate - today) / (1000 * 60 * 60 * 24));
+
+        if (differenceInDays < 0) {
+            dateCell.style.backgroundColor = 'lightgray'; // Past date
+        } else if (differenceInDays <= 7) {
+            dateCell.style.backgroundColor = 'palevioletred'; // Within the next week
+        }  else if (differenceInDays <= 14) {
+            dateCell.style.backgroundColor = '#FFD580';
+         } // Within the next week
+            else {
+            dateCell.style.backgroundColor = 'lightgreen'; // Future date
+        }
+    });
+});
+
+
         function toggleEditForm(index) {
             const editForm = document.getElementById('editForm' + index);
             editForm.style.display = editForm.style.display === 'none' ? 'block' : 'none';

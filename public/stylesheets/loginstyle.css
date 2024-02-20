@@ -1,7 +1,7 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background-image: url("../images/registerbg.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("https://img.freepik.com/free-vector/safari-tour-realistic-illustration_52683-78209.jpg");
     background-size: cover;  
   }
   
@@ -20,9 +20,12 @@ body {
     width: 95%;
     margin: 5px 0;
     height: 20px;  
+    background-color: rgba(255,255,255, 0.3);
   }
   .form
   {
+    background: transparent;
+    backdrop-filter: blur(40px);
     width: 60%;
     color: white;
     padding: 20px;
@@ -40,6 +43,8 @@ body {
     margin-left: 40%;
     margin-top: 5px;
     border-radius: 4px;
+    background-color: transparent;
+    color: white;
   }
   a{
     color: white;
