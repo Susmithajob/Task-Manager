@@ -88,8 +88,8 @@ h1{
   }
   
 #logoutForm {
-    position: fixed;
-    bottom: 15px;
+    position: relative;
+    bottom: -35px;
     left: 50%;
     transform: translateX(-50%);
 }

@@ -95,9 +95,6 @@ router.post('/deleteTask', function(req, res) {
       // Find the index of the task to be deleted
       const index = user.tasks.findIndex(task => task._id.toString() === req.body.taskId);
 
-      if (index === -1) {
-        return res.status(404).send('Task not found');
-      }
 
       // Remove the task from the tasks array
       user.tasks.splice(index, 1);
@@ -115,10 +112,7 @@ router.post('/deleteTask', function(req, res) {
 });
 
 router.post('/editTask', function(req, res) {
-  if (!req.isAuthenticated()) {
-    return res.status(401).send('Unauthorized');
-  }
-
+ 
   userModel.findById(req.user._id)
     .then(user => {
       if (!user) {
