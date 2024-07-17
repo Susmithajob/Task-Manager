@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+const CONNECTION = require('../constant');
 
-mongoose.connect("mongodb+srv://susmithajob93:taskmanager@cluster0.vzh9e3i.mongodb.net/taskmanager?retryWrites=true&w=majority");
+mongoose.connect(CONNECTION);
 
 const userSchema = mongoose.Schema({
   firstName : {
