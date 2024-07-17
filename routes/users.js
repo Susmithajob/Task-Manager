@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
-const CONNECTION = require('../constant');
+
+require('dotenv').config();
+const CONNECTION = process.env.CONNECTION;
 
 mongoose.connect(CONNECTION);
+
+
 
 const userSchema = mongoose.Schema({
   firstName : {
